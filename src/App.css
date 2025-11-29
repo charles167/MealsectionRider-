@@ -1,0 +1,9 @@
+@import "tailwindcss";
+* {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+}
+:root {
+  --default: #a4161b;
+  --defaultLight: #a4161b3f;
+}
