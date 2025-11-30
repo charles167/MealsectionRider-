@@ -34,6 +34,8 @@ const History = () => {
       console.log(error);
     }
   };
+  console.log(withdrawals);
+  
 
   const findRider = allRider?.find((item) => item._id === riderId);
   // Fetch all withdrawals on mount
@@ -89,32 +91,34 @@ const History = () => {
 
   const filteredWithdrawals = useMemo(() => {
     const q = query.trim().toLowerCase();
-    return withdrawals.filter((w) => {
-      const statusLabel =
-        w.status === true
-          ? "Completed"
-          : w.status === false
-          ? "Rejected"
-          : "Pending";
-      const matchStatus =
-        statusFilter === "All" || statusLabel === statusFilter;
-      if (!q) return matchStatus;
-      const dateStr = w.date
-        ? new Date(w.date).toLocaleDateString("en-GB", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-          })
-        : "";
-      const amountStr = (w.amount || 0).toString();
-      return (
-        matchStatus &&
-        (dateStr.toLowerCase().includes(q) ||
-          amountStr.includes(q) ||
-          statusLabel.toLowerCase().includes(q))
-      );
-    });
-  }, [withdrawals, query, statusFilter]);
+    return withdrawals
+      .filter((w) => w.riderId === riderId) // Only show withdrawals for the logged-in rider
+      .filter((w) => {
+        const statusLabel =
+          w.status === true
+            ? "Completed"
+            : w.status === false
+            ? "Rejected"
+            : "Pending";
+        const matchStatus =
+          statusFilter === "All" || statusLabel === statusFilter;
+        if (!q) return matchStatus;
+        const dateStr = w.date
+          ? new Date(w.date).toLocaleDateString("en-GB", {
+              day: "2-digit",
+              month: "short",
+              year: "numeric",
+            })
+          : "";
+        const amountStr = (w.amount || 0).toString();
+        return (
+          matchStatus &&
+          (dateStr.toLowerCase().includes(q) ||
+            amountStr.includes(q) ||
+            statusLabel.toLowerCase().includes(q))
+        );
+      });
+  }, [withdrawals, query, statusFilter, riderId]);
 
   const exportCSV = () => {
     const rows = [

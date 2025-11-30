@@ -980,6 +980,17 @@ const Orders = () => {
                   <p className="text-sm text-gray-500">
                     Order #{selectedItem._id.slice(0, 10)}
                   </p>
+                  {/* Delivery Address for all modals */}
+                  {selectedItem?.Address && (
+                    <div className="mt-3 p-3 rounded-lg bg-purple-50 border border-purple-200">
+                      <span className="block text-xs font-semibold text-purple-700 mb-1">
+                        Delivery Address:
+                      </span>
+                      <span className="text-sm text-purple-900">
+                        {selectedItem.Address}
+                      </span>
+                    </div>
+                  )}
                   {selectedItem?.deliveryNote && (
                     <div className="mt-3 p-3 rounded-lg bg-blue-50 border border-blue-200">
                       <span className="block text-xs font-semibold text-blue-700 mb-1">
