@@ -980,7 +980,7 @@ const Orders = () => {
                   <p className="text-sm text-gray-500">
                     Order #{selectedItem._id.slice(0, 10)}
                   </p>
-                  {/* Delivery Address for all modals */}
+                  {/* Delivery Address */}
                   {selectedItem?.Address && (
                     <div className="mt-3 p-3 rounded-lg bg-purple-50 border border-purple-200">
                       <span className="block text-xs font-semibold text-purple-700 mb-1">
@@ -988,6 +988,17 @@ const Orders = () => {
                       </span>
                       <span className="text-sm text-purple-900">
                         {selectedItem.Address}
+                      </span>
+                    </div>
+                  )}
+                  {/* Customer Phone Number */}
+                  {selectedItem?.PhoneNumber && (
+                    <div className="mt-3 p-3 rounded-lg bg-green-50 border border-green-200">
+                      <span className="block text-xs font-semibold text-green-700 mb-1">
+                        Customer Phone Number:
+                      </span>
+                      <span className="text-sm text-green-900">
+                        {selectedItem.PhoneNumber}
                       </span>
                     </div>
                   )}
