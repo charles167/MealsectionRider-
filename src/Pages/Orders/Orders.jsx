@@ -833,9 +833,8 @@ const Orders = () => {
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-100">
                     {filteredOrders
-                      .filter((item) => item.currentStatus === "Delivered")
+                      .filter((item) => item.currentStatus === "Delivered"  && item.rider === riderId)
                       .reverse()
-                      .slice(0, 6)
                       .map((item) => (
                         <tr
                           key={item._id}
